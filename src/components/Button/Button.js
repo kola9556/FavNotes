@@ -19,6 +19,7 @@ const Button = styled.button`
       width: 105px;
       height: 30px;
       font-size: 10px;
+      visibility: ${({ visibility }) => visibility || 'hidden'};
     `}
 `;
 
