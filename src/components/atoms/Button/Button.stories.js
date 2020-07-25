@@ -2,25 +2,14 @@ import React from 'react';
 import Button from './Button';
 
 export default {
-  title: 'MyButton',
+  title: 'Button',
   component: Button,
 };
 
-export const Text = () => {
-  const actio = () => {
-    const bButton = document.getElementById('b');
-    if (bButton.style.visibility === 'hidden') {
-      bButton.style.visibility = 'visible';
-    } else {
-      bButton.style.visibility = 'hidden';
-    }
-  };
-  return (
-    <>
-      <Button onClick={actio}>Hello Button</Button>
-      <Button id="b" secondary visibility="hidden">
-        WOW!
-      </Button>
-    </>
-  );
+export const CloseSave = () => {
+  return <Button>Close/Save</Button>;
+};
+
+export const Remove = () => {
+  return <Button secondary>Remove</Button>;
 };

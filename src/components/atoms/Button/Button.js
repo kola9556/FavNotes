@@ -15,7 +15,7 @@ const Button = styled.button`
   ${({ secondary }) =>
     secondary &&
     css`
-      background-color: ${({ theme }) => theme.secondary};
+      background-color: ${({ theme }) => theme.grey200};
       width: 105px;
       height: 30px;
       font-size: 10px;
