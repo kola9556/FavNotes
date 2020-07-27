@@ -6,14 +6,14 @@ export default {
   component: Card,
 };
 
-export const primaryCard = () => {
+export const noteCard = () => {
   return <Card />;
 };
 
-export const secondaryCard = () => {
+export const twitterCard = () => {
   return <Card cardType="twitter" />;
 };
 
-export const tertiaryCard = () => {
+export const articleCard = () => {
   return <Card cardType="article" />;
 };
