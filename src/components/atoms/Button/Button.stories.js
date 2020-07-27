@@ -11,5 +11,5 @@ export const CloseSave = () => {
 };
 
 export const Remove = () => {
-  return <Button secondary>Remove</Button>;
+  return <Button twitter>Remove</Button>;
 };
