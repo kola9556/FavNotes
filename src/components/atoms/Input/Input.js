@@ -9,6 +9,10 @@ const Input = styled.input`
   border: none;
   border-radius: 50px;
 
+  :focus {
+    outline: none;
+  }
+
   ::placeholder {
     text-transform: uppercase;
     letter-spacing: 1px;

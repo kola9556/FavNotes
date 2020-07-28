@@ -1,7 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
-    @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+    @import url('https://fonts.googleapis.com/css?family=Montserrat:300,600');
 
     *, *::before, *::after {
         box-sizing: border-box;
@@ -9,11 +9,15 @@ const GlobalStyle = createGlobalStyle`
         -moz-osx-font-smoothing: grayscale;
     }
 
+    html {
+        font-size: 67.5%;
+
+    }
 
     body {
         padding-left: 153px;
         font-size: 1.6rem;
-        font-family: "Montserrat";
+        font-family: "Montserrat", sans-serif;
     }
 `;
 

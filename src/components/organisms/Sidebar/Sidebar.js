@@ -50,7 +50,7 @@ const Sidebar = ({ cardType }) => (
     <StyledWrapper activeColor={cardType}>
       <StyledLogo to="/" />
       <ThreeIconsWrapper>
-        <ButtonIcon exact as={NavLink} acticeClass="active" to="/" icon={pen} />
+        <ButtonIcon exact as={NavLink} acticeClass="active" to="/notes" icon={pen} />
         <ButtonIcon as={NavLink} acticeClass="active" to="/twitters" icon={twitter} />
         <ButtonIcon as={NavLink} acticeClass="active" to="/articles" icon={bulb} />
       </ThreeIconsWrapper>

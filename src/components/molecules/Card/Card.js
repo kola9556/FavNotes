@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Heading from 'components/atoms/Heading/Heading';
 import Paragraph from 'components/atoms/Paragraph/Paragraph';
 import Button from 'components/atoms/Button/Button';
-import ola from 'assets/ola.jpg';
+
 import LinkIcon from 'assets/link.svg';
 
 const StyledWrapper = styled.div`
@@ -28,6 +28,12 @@ const InnerWrapper = styled.div`
       flex-direction: column;
       justify-content: space-between;
     `}
+
+  ${({ top }) =>
+    top &&
+    css`
+      min-height: 120px;
+    `}
 `;
 
 const DateInfo = styled(Paragraph)`
@@ -47,39 +53,35 @@ const StyledAvatar = styled.img`
   border: 5px solid ${({ theme }) => theme.twitter};
   position: absolute;
   right: 25px;
-  top: 25px;
+  top: 60px;
 `;
 
 const StyledLinkButton = styled.a`
   display: block;
-  width: 47px;
-  height: 47px;
+  width: 86px;
+  height: 86px;
+  border: 5px solid ${({ theme }) => theme.article};
   border-radius: 50px;
   background: white url(${LinkIcon});
   position: absolute;
   right: 25px;
-  top: 25px;
+  top: 60px;
   background-size: 60%;
   background-position: 50%;
   background-repeat: no-repeat;
 `;
 
-const Card = ({ cardType }) => (
+const Card = ({ cardType, title, content, created, twitterName, articleUrl }) => (
   <>
     <StyledWrapper>
-      {cardType === 'twitter' && <StyledAvatar src={ola} />}
-      {cardType === 'article' && <StyledLinkButton />}
-      <InnerWrapper flex activeColor={cardType}>
-        <StyledHeading>My best note ever</StyledHeading>
-        <DateInfo>3 days</DateInfo>
+      {cardType === 'article' && <StyledLinkButton href={articleUrl} target="_blank" />}
+      {cardType === 'twitter' && <StyledAvatar src={`http://twivatar.glitch.me/${twitterName}`} />}
+      <InnerWrapper top flex activeColor={cardType}>
+        <StyledHeading>{title}</StyledHeading>
+        <DateInfo>{created}</DateInfo>
       </InnerWrapper>
       <InnerWrapper flex>
-        <Paragraph>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam elementum massa sapien,
-          eget varius nunc dapibus id. Nunc accumsan tellus quis scelerisque lacinia. Mauris
-          dignissim vestibulum feugiat. Phasellus molestie ultrices lectus, nec sodales nulla
-          lacinia eget.
-        </Paragraph>
+        <Paragraph>{content}</Paragraph>
         <Button secondary>Remove</Button>
       </InnerWrapper>
     </StyledWrapper>
@@ -88,10 +90,17 @@ const Card = ({ cardType }) => (
 
 Card.propTypes = {
   cardType: PropTypes.oneOf(['note', 'twitter', 'articles']),
+  title: PropTypes.string.isRequired,
+  content: PropTypes.string.isRequired,
+  created: PropTypes.string.isRequired,
+  twitterName: PropTypes.string,
+  articleUrl: PropTypes.string,
 };
 
 Card.defaultProps = {
   cardType: 'note',
+  twitterName: null,
+  articleUrl: null,
 };
 
 export default Card;
