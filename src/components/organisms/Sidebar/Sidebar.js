@@ -1,69 +1,74 @@
 import React from 'react';
-import styled from 'styled-components';
-import logo from 'assets/logo.svg';
-import pen from 'assets/pen.svg';
-import bulb from 'assets/bulb.svg';
-import logout from 'assets/logout.svg';
-import twitter from 'assets/twitter.svg';
-import ButtonIcon from 'components/atoms/ButtonIcon/ButtonIcon';
-import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import ButtonIcon from 'components/atoms/ButtonIcon/ButtonIcon';
+import bulbIcon from 'assets/icons/bulb.svg';
+import logoutIcon from 'assets/icons/logout.svg';
+import penIcon from 'assets/icons/pen.svg';
+import twitterIcon from 'assets/icons/twitter.svg';
+import logoIcon from 'assets/icons/logo.svg';
 
-const StyledWrapper = styled.div`
+const StyledWrapper = styled.nav`
   position: fixed;
   left: 0;
   top: 0;
-  background-color: ${({ activeColor, theme }) => (activeColor ? theme[activeColor] : 'white')};
+  padding: 25px 0;
+  width: 150px;
+  height: 100vh;
+  background-color: ${({ activeColor, theme }) => (activeColor ? theme[activeColor] : theme.note)};
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: space-between;
-  width: 153px;
-  height: 100vh;
+  align-items: center;
 `;
 
-const StyledLogo = styled(NavLink)`
+const StyledLogoLink = styled(NavLink)`
   display: block;
   width: 67px;
   height: 67px;
-  background-image: url(${logo});
-  background-position: 50% 50%;
+  background-image: url(${logoIcon});
   background-repeat: no-repeat;
+  background-position: 50% 50%;
   background-size: 80%;
   border: none;
   margin-bottom: 10vh;
 `;
 
-const ThreeIconsWrapper = styled.div`
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-`;
-
-const ButtonIconForLogout = styled(ButtonIcon)`
+const StyledLogoutButton = styled(ButtonIcon)`
   margin-top: auto;
 `;
 
-const Sidebar = ({ cardType }) => (
-  <>
-    <StyledWrapper activeColor={cardType}>
-      <StyledLogo to="/" />
-      <ThreeIconsWrapper>
-        <ButtonIcon exact as={NavLink} acticeClass="active" to="/notes" icon={pen} />
-        <ButtonIcon as={NavLink} acticeClass="active" to="/twitters" icon={twitter} />
-        <ButtonIcon as={NavLink} acticeClass="active" to="/articles" icon={bulb} />
-      </ThreeIconsWrapper>
-      <ButtonIconForLogout as={NavLink} acticeClass="active" to="/login" icon={logout} />
-    </StyledWrapper>
-  </>
+const StyledLinksList = styled.ul`
+  margin: 0;
+  padding: 0;
+  list-style: none;
+`;
+
+const Sidebar = ({ pageType }) => (
+  <StyledWrapper activeColor={pageType}>
+    <StyledLogoLink to="/" />
+    <StyledLinksList>
+      <li>
+        <ButtonIcon as={NavLink} to="/notes" icon={penIcon} activeclass="active" />
+      </li>
+      <li>
+        <ButtonIcon as={NavLink} to="/twitters" icon={twitterIcon} activeclass="active" />
+      </li>
+      <li>
+        <ButtonIcon as={NavLink} to="/articles" icon={bulbIcon} activeclass="active" />
+      </li>
+    </StyledLinksList>
+    <StyledLogoutButton as={NavLink} to="/login" icon={logoutIcon} />
+  </StyledWrapper>
 );
 
 Sidebar.propTypes = {
-  cardType: PropTypes.oneOf(['note', 'twitter', 'articles']),
+  pageType: PropTypes.oneOf(['notes', 'twitters', 'articles']),
 };
 
 Sidebar.defaultProps = {
-  cardType: 'note',
+  pageType: 'notes',
 };
+
 export default Sidebar;

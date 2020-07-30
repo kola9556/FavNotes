@@ -1,15 +1,16 @@
-import React from 'react';
-import styled, { css } from 'styled-components';
+/* eslint-disable react/state-in-constructor */
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Heading from 'components/atoms/Heading/Heading';
+import { Redirect } from 'react-router-dom';
+import styled, { css } from 'styled-components';
 import Paragraph from 'components/atoms/Paragraph/Paragraph';
+import Heading from 'components/atoms/Heading/Heading';
 import Button from 'components/atoms/Button/Button';
-
-import LinkIcon from 'assets/link.svg';
+import LinkIcon from 'assets/icons/link.svg';
 
 const StyledWrapper = styled.div`
-  position: relative;
-  box-shadow: 0px 10px 30px -10px ${({ theme }) => theme.grey200};
+  min-height: 380px;
+  box-shadow: 0 10px 30px -10px hsla(0, 0%, 0%, 0.1);
   border-radius: 10px;
   overflow: hidden;
   position: relative;
@@ -18,8 +19,13 @@ const StyledWrapper = styled.div`
 `;
 
 const InnerWrapper = styled.div`
+  position: relative;
   padding: 17px 30px;
   background-color: ${({ activeColor, theme }) => (activeColor ? theme[activeColor] : 'white')};
+
+  :first-of-type {
+    z-index: 9999;
+  }
 
   ${({ flex }) =>
     flex &&
@@ -27,12 +33,6 @@ const InnerWrapper = styled.div`
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-    `}
-
-  ${({ top }) =>
-    top &&
-    css`
-      min-height: 120px;
     `}
 `;
 
@@ -49,56 +49,72 @@ const StyledHeading = styled(Heading)`
 const StyledAvatar = styled.img`
   width: 86px;
   height: 86px;
+  border: 5px solid ${({ theme }) => theme.twitters};
   border-radius: 50px;
-  border: 5px solid ${({ theme }) => theme.twitter};
   position: absolute;
   right: 25px;
-  top: 60px;
+  top: 25px;
 `;
 
 const StyledLinkButton = styled.a`
   display: block;
-  width: 86px;
-  height: 86px;
-  border: 5px solid ${({ theme }) => theme.article};
+  width: 47px;
+  height: 47px;
   border-radius: 50px;
-  background: white url(${LinkIcon});
-  position: absolute;
-  right: 25px;
-  top: 60px;
+  background: white url(${LinkIcon}) no-repeat;
   background-size: 60%;
   background-position: 50%;
-  background-repeat: no-repeat;
+  position: absolute;
+  right: 25px;
+  top: 50%;
+  transform: translateY(-50%);
 `;
 
-const Card = ({ cardType, title, content, created, twitterName, articleUrl }) => (
-  <>
-    <StyledWrapper>
-      {cardType === 'article' && <StyledLinkButton href={articleUrl} target="_blank" />}
-      {cardType === 'twitter' && <StyledAvatar src={`http://twivatar.glitch.me/${twitterName}`} />}
-      <InnerWrapper top flex activeColor={cardType}>
-        <StyledHeading>{title}</StyledHeading>
-        <DateInfo>{created}</DateInfo>
-      </InnerWrapper>
-      <InnerWrapper flex>
-        <Paragraph>{content}</Paragraph>
-        <Button secondary>Remove</Button>
-      </InnerWrapper>
-    </StyledWrapper>
-  </>
-);
+class Card extends Component {
+  state = {
+    redirect: false,
+  };
+
+  handleCardClick = () => this.setState({ redirect: true });
+
+  render() {
+    const { id, cardType, title, created, twitterName, articleUrl, content } = this.props;
+    const { redirect } = this.state;
+
+    if (redirect) {
+      return <Redirect to={`${cardType}/details/${id}`} />;
+    }
+    return (
+      <StyledWrapper onClick={this.handleCardClick}>
+        <InnerWrapper activeColor={cardType}>
+          <StyledHeading>{title}</StyledHeading>
+          <DateInfo>{created}</DateInfo>
+          {cardType === 'twitters' && (
+            <StyledAvatar src={`http://twivatar.glitch.me/${twitterName}`} />
+          )}
+          {cardType === 'articles' && <StyledLinkButton href={articleUrl} />}
+        </InnerWrapper>
+        <InnerWrapper flex>
+          <Paragraph>{content}</Paragraph>
+          <Button secondary>REMOVE</Button>
+        </InnerWrapper>
+      </StyledWrapper>
+    );
+  }
+}
 
 Card.propTypes = {
-  cardType: PropTypes.oneOf(['note', 'twitter', 'articles']),
+  id: PropTypes.number.isRequired,
+  cardType: PropTypes.oneOf(['notes', 'twitters', 'articles']),
   title: PropTypes.string.isRequired,
-  content: PropTypes.string.isRequired,
   created: PropTypes.string.isRequired,
   twitterName: PropTypes.string,
   articleUrl: PropTypes.string,
+  content: PropTypes.string.isRequired,
 };
 
 Card.defaultProps = {
-  cardType: 'note',
+  cardType: 'notes',
   twitterName: null,
   articleUrl: null,
 };

@@ -1,19 +1,8 @@
 import React from 'react';
+import { storiesOf } from '@storybook/react';
+import StoryRouter from 'storybook-react-router';
 import Sidebar from './Sidebar';
 
-export default {
-  title: 'Sidebar',
-  component: Sidebar,
-};
-
-export const noteSidebar = () => {
-  return <Sidebar cardType="note" />;
-};
-
-export const twitterSidebar = () => {
-  return <Sidebar cardType="twitter" />;
-};
-
-export const articleSidebar = () => {
-  return <Sidebar cardType="article" />;
-};
+storiesOf('Organisms/Sidebar', module)
+  .addDecorator(StoryRouter())
+  .add('Normal', () => <Sidebar />);

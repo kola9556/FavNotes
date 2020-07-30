@@ -1,62 +1,27 @@
 import React from 'react';
-import ButtonIcon from 'components/atoms/ButtonIcon/ButtonIcon';
 import styled from 'styled-components';
-import pen from 'assets/pen.svg';
-import bulb from 'assets/bulb.svg';
-import logout from 'assets/logout.svg';
-import plus from 'assets/plus.svg';
-import twitter from 'assets/twitter.svg';
-
-export default {
-  title: 'ButtonIcon',
-  component: ButtonIcon,
-};
+import { storiesOf } from '@storybook/react';
+import bulbIcon from 'assets/icons/bulb.svg';
+import logoutIcon from 'assets/icons/logout.svg';
+import penIcon from 'assets/icons/pen.svg';
+import plusIcon from 'assets/icons/plus.svg';
+import twitterIcon from 'assets/icons/twitter.svg';
+import ButtonIcon from './ButtonIcon';
 
 const YellowBackground = styled.div`
-  width: 130px;
-  background-color: ${({ theme }) => theme.note};
-  height: 130px;
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 500px;
+  height: 500px;
+  background: ${({ theme }) => theme.note};
 `;
 
-export const Pen = () => {
-  return (
-    <YellowBackground>
-      <ButtonIcon icon={pen} />
-    </YellowBackground>
-  );
-};
-
-export const Bulb = () => {
-  return (
-    <YellowBackground>
-      <ButtonIcon icon={bulb} />
-    </YellowBackground>
-  );
-};
-
-export const Logout = () => {
-  return (
-    <YellowBackground>
-      <ButtonIcon icon={logout} />
-    </YellowBackground>
-  );
-};
-
-export const Plus = () => {
-  return (
-    <YellowBackground>
-      <ButtonIcon icon={plus} />
-    </YellowBackground>
-  );
-};
-
-export const Twitter = () => {
-  return (
-    <YellowBackground>
-      <ButtonIcon icon={twitter} />
-    </YellowBackground>
-  );
-};
+storiesOf('Atoms/ButtonIcon', module)
+  .addDecorator((story) => <YellowBackground>{story()}</YellowBackground>)
+  .add('Bulb', () => <ButtonIcon icon={bulbIcon} />)
+  .add('Active', () => <ButtonIcon active icon={bulbIcon} />)
+  .add('Logout', () => <ButtonIcon icon={logoutIcon} />)
+  .add('Pen', () => <ButtonIcon icon={penIcon} />)
+  .add('Plus', () => <ButtonIcon icon={plusIcon} />)
+  .add('Twitter', () => <ButtonIcon icon={twitterIcon} />);

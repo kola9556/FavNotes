@@ -1,15 +1,7 @@
 import React from 'react';
+import { storiesOf } from '@storybook/react';
 import Heading from './Heading';
 
-export default {
-  title: 'Heading',
-  component: Heading,
-};
-
-export const Normal = () => {
-  return <Heading>Hello Roman</Heading>;
-};
-
-export const big = () => {
-  return <Heading big>Hello Roman</Heading>;
-};
+storiesOf('Atoms/Heading', module)
+  .add('Normal', () => <Heading>Hello Roman</Heading>)
+  .add('big', () => <Heading big>Hello Roman</Heading>);
