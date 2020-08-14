@@ -5,6 +5,8 @@
 The react app, which allows you to save notes, twitter accounts, or articles. 
 Still in progress...
 
+### Hosted on : https://alexfavnotes.netlify.app
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
