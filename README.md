@@ -1,3 +1,11 @@
+
+
+# NOTE: This project is coded by me but it's step by step from Adam Romański course from eduweb.pl. I have been learning React and Redux from it. 
+
+The react app, which allows you to save notes, twitter accounts, or articles. 
+Still in progress...
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
