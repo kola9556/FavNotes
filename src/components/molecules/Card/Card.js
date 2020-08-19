@@ -102,7 +102,7 @@ class Card extends Component {
           <StyledHeading>{title}</StyledHeading>
           <DateInfo>{created}</DateInfo>
           {pageContext === 'twitters' && (
-            <StyledAvatar src={`https://avatars.io/twitter/${twitterName}`} />
+            <StyledAvatar src={`https://twitter-avatar.now.sh/${twitterName}`} />
           )}
           {pageContext === 'articles' && <StyledLinkButton href={articleUrl} />}
         </InnerWrapper>
