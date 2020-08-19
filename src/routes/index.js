@@ -7,5 +7,4 @@ export const routes = {
   articles: '/articles',
   article: '/articles/details/:id',
   login: '/login',
-  new: '/:pageType(twitters|notes|articles)/new',
 };

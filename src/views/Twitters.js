@@ -1,15 +1,14 @@
 import React from 'react';
-import { PropTypes } from 'prop-types';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import GridTemplate from 'templates/GridTemplate';
 import Card from 'components/molecules/Card/Card';
-import { connect } from 'react-redux';
 
 const Twitters = ({ twitters }) => (
-  <GridTemplate pageType="twitters">
+  <GridTemplate>
     {twitters.map(({ title, content, twitterName, created, id }) => (
       <Card
         id={id}
-        cardType="twitters"
         title={title}
         content={content}
         twitterName={twitterName}
@@ -24,12 +23,10 @@ Twitters.propTypes = {
   twitters: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
-      cardType: PropTypes.oneOf(['notes', 'twitters', 'articles']),
       title: PropTypes.string.isRequired,
-      created: PropTypes.string.isRequired,
-      twitterName: PropTypes.string,
-      articleUrl: PropTypes.string,
       content: PropTypes.string.isRequired,
+      twitterName: PropTypes.string.isRequired,
+      created: PropTypes.string.isRequired,
     }),
   ),
 };
@@ -38,8 +35,9 @@ Twitters.defaultProps = {
   twitters: [],
 };
 
-const mapStateToProps = ({ twitters }) => ({ twitters });
+const mapStateToProps = (state) => {
+  const { twitters } = state;
+  return { twitters };
+};
 
 export default connect(mapStateToProps)(Twitters);
-
-/*  */
