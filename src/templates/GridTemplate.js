@@ -59,18 +59,18 @@ const StyledButtonIcon = styled(ButtonIcon)`
 
 class GridTemplate extends Component {
   state = {
-    isNewItemVisible: false,
+    isNewItemBarVisible: false,
   };
 
-  handleNewItemBarToggle = () => {
+  toggleNewItemBar = () => {
     this.setState((prevState) => ({
-      isNewItemVisible: !prevState.isNewItemVisible,
+      isNewItemBarVisible: !prevState.isNewItemBarVisible,
     }));
   };
 
   render() {
     const { children, pageContext } = this.props;
-    const { isNewItemVisible } = this.state;
+    const { isNewItemBarVisible } = this.state;
 
     return (
       <UserPageTemplate>
@@ -84,11 +84,11 @@ class GridTemplate extends Component {
           </StyledPageHeader>
           <StyledGrid>{children}</StyledGrid>
           <StyledButtonIcon
+            onClick={this.toggleNewItemBar}
             icon={plusIcon}
             activecolor={pageContext}
-            onClick={this.handleNewItemBarToggle}
           />
-          <NewItemBar isVisible={isNewItemVisible} />
+          <NewItemBar handleClose={this.toggleNewItemBar} isVisible={isNewItemBarVisible} />
         </StyledWrapper>
       </UserPageTemplate>
     );
